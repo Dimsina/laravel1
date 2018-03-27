@@ -64,14 +64,12 @@
                                                      document.getElementById('destroy-form').submit();">
                                         {{ __('Delete') }}
                                     </a>
-
-
-                                    <a class="dropdown-item" href="/edit"
-                                    >
-                                        {{ __('Change') }}
+                                    <a class="dropdown-item" href="/edit">
+                                        {{ __('Change Profil') }}
                                     </a>
-
-
+                                    <a class="dropdown-item" href="/home">
+                                        {{ __('To Dash') }}
+                                    </a>
                                 </div>
                             </li>
                         @endguest
