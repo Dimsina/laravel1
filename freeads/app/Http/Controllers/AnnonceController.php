@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Annonce;
+use PhotoController;
 
 class AnnonceController extends Controller
 {
@@ -13,8 +16,17 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        $annonce = Annonce::paginate(5);
-        return view('home', ['annonce' => $annonce]);
+        $annonce = Annonce::latest()->paginate(4);
+        return view('annonce', ['annonce' => $annonce]);
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'prix' => 'required|float',
+        ]);
     }
 
     /**
@@ -24,13 +36,7 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        Annonce::create([
-            'user_id' => Auth::id(),
-            'titre' => request('titre'),
-            'description' => request('description'),
-            'prix' => request('prix'),
-        ]);
-        return redirect('home')->with('message', 'Annonce créée avec succès!');;
+       return view('home');
     }
 
     /**
@@ -41,7 +47,21 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'titre' => 'required',
+            'description' => 'required',
+            'prix' => 'required',
+
+        ]);
+        dd(request('photo'));
+        Annonce::create([
+            'user_id' => Auth::id(),
+            'titre' => request('titre'),
+            'description' => request('description'),
+            'prix' => request('prix'),
+            'photo' => request('photo'),
+    ]);
+        return redirect('annonce');
     }
 
     /**
@@ -52,7 +72,8 @@ class AnnonceController extends Controller
      */
     public function show($id)
     {
-
+        $annonce = Annonce::find($id);
+        return view('annonce-id', compact('annonce'));
     }
 
     /**
@@ -75,13 +96,15 @@ class AnnonceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $annonce = Annonce::where(request('id', $id));
+        $annonce = Annonce::where('id', $id);
         $annonce->update([
+            'id' => request('id'),
+            'user_id' => Auth::id(),
             'titre' => request('titre'),
             'description' => request('description'),
             'prix' => request('prix'),
         ]);
-        return redirect()->back()->with('message', 'Annonce mise à jour');
+        return redirect()->back();
     }
 
     /**
@@ -90,10 +113,10 @@ class AnnonceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
         $annonce = Annonce::find(request('id'));
         $annonce->delete();
-        return redirect()->back()->with('message', 'Annonce supprimée avec succès');
+        return redirect()->back();
     }
 }

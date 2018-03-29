@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use App\Photo;
+use AnnonceController;
 
-class UserController extends Controller
+class PhotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,7 @@ class UserController extends Controller
     public function index()
     {
         //
-
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -59,9 +56,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('auth.update');
+        //
     }
 
     /**
@@ -71,15 +68,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        DB::table('users')
-            ->where('id', $id)
-            ->update(['name' => request('name'),
-                'email' => request('email'),
-                'password' => Hash::make(request('password')),
-                ]);
-        return redirect('home')->with('message', 'Informations remplacées avec succès!');
+        //
     }
 
     /**
@@ -88,9 +79,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        DB::table('users')->where('id', Auth::id())->delete();
-        return view('index');
+        //
     }
 }

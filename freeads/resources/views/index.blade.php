@@ -9,12 +9,16 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background: url("img/background-colored.jpg");
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                -webkit-background-size: cover;
+                background-size: cover;
+                color: White;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -50,7 +54,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: White;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;

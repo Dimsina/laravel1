@@ -24,8 +24,17 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/update/{id}', 'UserController@update')->name('update');
     Route::post('/destroy', 'UserController@destroy')->name('destroy');
     Route::get('/edit', 'UserController@edit')->name('edit');
-    Route::get('annonce/index', 'AnnonceController@index')->name('annonce/index');
-    Route::post('annonce/create','AnnonceController@create')->name('annonce/create');
+    Route::get('/annonce', 'AnnonceController@index')->name('annonce');
+    Route::get('/annonce/create','AnnonceController@create')->name('annonce/create');
+    Route::post('/annonce/store', 'AnnonceController@store')->name('annonce/store');
+    Route::put('/annonce/{id}/update', 'AnnonceController@update')->name('annonce/{id}/update');
+    Route::get('/annonce/destroy', 'AnnonceController@destroy')->name('annonce/destroy');
+    Route::get('/annonce-id/show/{id}', 'AnnonceController@show')->name('annonce-id/show/{id}');
+
+
+   /* Route::resource('annonce', 'AnnonceController', [
+        'only' => ['create', 'store', 'destroy']
+    ]);*/
 
 });
 

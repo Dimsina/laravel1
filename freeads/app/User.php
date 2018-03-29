@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public function soft()
     {
-        Schema::table('Users', function ($table) {
+        Schema::table('users', function ($table) {
             $table->softDeletes();
         });
     }
