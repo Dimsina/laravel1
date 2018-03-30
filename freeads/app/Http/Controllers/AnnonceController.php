@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
 use Illuminate\Http\Request;
 use Auth;
 use App\Annonce;
@@ -53,14 +54,23 @@ class AnnonceController extends Controller
             'prix' => 'required',
 
         ]);
-        dd(request('photo'));
-        Annonce::create([
+        $annonce = Annonce::create([
             'user_id' => Auth::id(),
             'titre' => request('titre'),
             'description' => request('description'),
             'prix' => request('prix'),
-            'photo' => request('photo'),
-    ]);
+
+        ]);
+
+        $image = $request->file('photo');
+        foreach ($image as $img) {
+            $name = $img->getClientOriginalName();
+            $img->storeAs('photo', $name, 'public');
+            $annonce->postPhoto(new Photo([
+                'img_name' => $name,
+            ]));
+        }
+
         return redirect('annonce');
     }
 

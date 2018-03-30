@@ -35,7 +35,7 @@
                                             <div class="card" style="width: 18rem; margin: 10px;">
                                                 <div class="card-header">
                                                     <img class="card-img"
-                                                         src="{{ $item->photo }}"
+                                                         src="{{ asset('storage/photo/'.$item->photo[0]->img_name) }}"
                                                          alt="image item">
                                                 </div>
                                                 <div class="card-title">
@@ -47,7 +47,7 @@
                                                         <a href="{{ route('annonce/destroy',['id' => $item->id]) }}"><i
                                                                     class="fas fa-trash-alt fa-lg"></i></a>
                                                         <a data-toggle="collapse" aria-expanded="false"
-                                                           aria-controls="collapse_$billet->id"
+                                                           aria-controls="collapse_$annonce->id"
                                                            href="#collapse_item_{{ $item->id }}"><i
                                                                     class="fas fa-edit"></i></a>
                                                     @endif

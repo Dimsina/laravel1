@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="background1">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -37,7 +38,7 @@
                                                 <div class="col-md-6">
                                                     <input id="photo" type="file" class="form-control"
                                                            name="photo[]" required
-                                                           autofocus>
+                                                           autofocus multiple/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -84,5 +85,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

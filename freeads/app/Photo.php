@@ -11,4 +11,9 @@ class Photo extends Model
     protected $fillable = [
         'id', 'annonce_id', 'img_name',
     ];
+
+    public function annonce()
+    {
+        return $this->belongsTo(Annonce::class);
+    }
 }
